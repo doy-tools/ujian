@@ -3,176 +3,159 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ujian Akhir Kelas 7 — Latihan Online</title>
+<title>Ujian Kelas 7 — Nilai Otomatis</title>
 <style>
-  :root{
-    --primary:#4f46e5;
-    --primary-dark:#4338ca;
-    --green:#10b981;
-    --red:#ef4444;
-    --text:#1e293b;
-    --muted:#64748b;
-    --line:#e2e8f0;
-    --card:#ffffff;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f8fafc 50%, #ecfeff);
+    color: #1e293b;
+    line-height: 1.6;
+    padding-bottom: 60px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{
-    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-    background:linear-gradient(135deg,#eef2ff 0%,#f8fafc 45%,#ecfeff 100%);
-    color:var(--text);
-    min-height:100vh;
-    padding:0 0 60px;
-    line-height:1.6;
+  header {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff;
+    padding: 28px 20px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(79,70,229,.25);
   }
+  header h1 { font-size: 1.5rem; margin-bottom: 6px; }
+  header p { font-size: .88rem; opacity: .9; }
 
-  header{
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
-    color:#fff;
-    padding:28px 20px 22px;
-    text-align:center;
-    box-shadow:0 8px 24px rgba(79,70,229,.25);
+  .bar-wrap {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 10px 20px;
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap; justify-content: center;
   }
-  header h1{font-size:1.6rem;letter-spacing:-.5px;}
-  header p{font-size:.9rem;opacity:.9;margin-top:6px;}
+  .progress-track {
+    flex: 1; min-width: 160px; height: 9px;
+    border-radius: 99px; background: #e2e8f0; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    transition: width .3s;
+  }
+  .bar-wrap span { font-size: .82rem; font-weight: 600; color: #64748b; white-space: nowrap; }
 
-  .bar-wrap{
-    position:sticky;top:0;z-index:20;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-    padding:10px 20px;
-    display:flex;align-items:center;gap:14px;
-    flex-wrap:wrap;justify-content:center;
-  }
-  .progress-track{
-    flex:1;min-width:180px;height:9px;border-radius:99px;
-    background:#e2e8f0;overflow:hidden;
-  }
-  .progress-fill{
-    height:100%;width:0%;border-radius:99px;
-    background:linear-gradient(90deg,#4f46e5,#06b6d4);
-    transition:width .3s ease;
-  }
-  .bar-wrap span{font-size:.82rem;font-weight:600;color:var(--muted);white-space:nowrap;}
+  .container { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
 
-  .container{max-width:860px;margin:0 auto;padding:24px 16px;}
-
-  .card{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:16px;
-    padding:20px 22px;
-    margin-bottom:16px;
-    box-shadow:0 2px 10px rgba(15,23,42,.04);
-    transition:box-shadow .2s, transform .2s;
-    animation:fade .35s ease both;
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(15,23,42,.04);
+    animation: fade .35s ease both;
   }
-  .card:hover{box-shadow:0 6px 22px rgba(15,23,42,.08);}
-  @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  @keyframes fade { from { opacity:0; transform: translateY(10px);} to { opacity:1; transform:none;} }
 
-  .q-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
-  .badge{
-    font-size:.7rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
-    padding:4px 10px;border-radius:99px;
+  .q-head {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 10px; margin-bottom: 10px; flex-wrap: wrap;
   }
-  .num{font-size:.75rem;color:var(--muted);font-weight:600;}
+  .badge {
+    font-size: .7rem; font-weight: 700; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 99px;
+  }
+  .num { font-size: .75rem; color: #64748b; font-weight: 600; }
 
-  .q-text{font-size:1rem;font-weight:600;margin-bottom:14px;color:#0f172a;}
+  .q-text { font-size: 1rem; font-weight: 600; margin-bottom: 14px; }
 
-  .options{display:flex;flex-direction:column;gap:8px;}
-  .option{
-    display:flex;align-items:center;gap:12px;
-    padding:11px 14px;border:1.5px solid var(--line);border-radius:11px;
-    cursor:pointer;transition:all .18s;background:#fff;
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border: 1.5px solid #e2e8f0;
+    border-radius: 11px; cursor: pointer;
+    transition: all .18s; background: #fff;
   }
-  .option:hover{border-color:#a5b4fc;background:#f5f3ff;}
-  .option input{display:none;}
-  .letter{
-    width:26px;height:26px;flex:0 0 26px;border-radius:50%;
-    display:grid;place-items:center;
-    background:#f1f5f9;color:var(--muted);
-    font-size:.78rem;font-weight:700;transition:all .18s;
+  .option:hover { border-color: #a5b4fc; background: #f5f3ff; }
+  .option input { display: none; }
+  .letter {
+    width: 26px; height: 26px; flex: 0 0 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: #f1f5f9; color: #64748b;
+    font-size: .78rem; font-weight: 700;
+    transition: all .18s;
   }
-  .opt-text{font-size:.92rem;}
-  .option input:checked ~ .letter{background:var(--primary);color:#fff;}
-  .option:has(input:checked){border-color:var(--primary);background:#eef2ff;}
+  .opt-text { font-size: .92rem; }
+  .option input:checked ~ .letter { background: #4f46e5; color: #fff; }
+  .option:has(input:checked) { border-color: #4f46e5; background: #eef2ff; }
 
-  .option.correct{border-color:var(--green);background:#ecfdf5;}
-  .option.correct .letter{background:var(--green);color:#fff;}
-  .option.wrong{border-color:var(--red);background:#fef2f2;}
-  .option.wrong .letter{background:var(--red);color:#fff;}
-  .option.disabled{cursor:default;}
+  .option.correct { border-color: #10b981 !important; background: #ecfdf5 !important; }
+  .option.correct .letter { background: #10b981 !important; color: #fff !important; }
+  .option.wrong { border-color: #ef4444 !important; background: #fef2f2 !important; }
+  .option.wrong .letter { background: #ef4444 !important; color: #fff !important; }
+  .option.disabled { cursor: default; }
+  .option.disabled:hover { background: inherit; }
 
-  .explain{
-    display:none;margin-top:12px;padding:11px 14px;border-radius:10px;
-    background:#f0f9ff;border-left:4px solid #0ea5e9;
-    font-size:.85rem;color:#0c4a6e;
+  .explain {
+    display: none; margin-top: 12px; padding: 11px 14px;
+    border-radius: 10px; background: #f0f9ff;
+    border-left: 4px solid #0ea5e9;
+    font-size: .85rem; color: #0c4a6e;
   }
-  .explain.show{display:block;animation:fade .3s ease both;}
+  .explain.show { display: block; }
 
-  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
-  button{
-    font-family:inherit;font-size:.95rem;font-weight:700;
-    padding:13px 30px;border:none;border-radius:12px;cursor:pointer;
-    transition:all .2s;
+  .actions { display: flex; justify-content: center; margin-top: 26px; }
+  button {
+    font-family: inherit; font-size: .95rem; font-weight: 700;
+    padding: 13px 30px; border: none; border-radius: 12px;
+    cursor: pointer; transition: all .2s;
+    background: #fff; color: #4f46e5;
+    border: 1.5px solid #4f46e5;
   }
-  .btn-ghost{background:#fff;color:var(--primary);border:1.5px solid var(--primary);}
-  .btn-ghost:hover{background:#eef2ff;}
-  button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+  button:hover { background: #eef2ff; }
 
-  /* Banner auto-submit */
-  .auto-banner{
-    display:none;
-    margin-top:26px;padding:16px 20px;border-radius:14px;
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
-    color:#fff;text-align:center;font-weight:600;font-size:.95rem;
-    box-shadow:0 10px 26px rgba(79,70,229,.3);
-    animation:pop .4s cubic-bezier(.2,.9,.3,1.3) both;
+  .auto-banner {
+    display: none; margin-top: 26px; padding: 16px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: #fff; text-align: center; font-weight: 600;
+    box-shadow: 0 10px 26px rgba(79,70,229,.3);
   }
-  .auto-banner.show{display:block;}
-  .auto-banner .spin{
-    display:inline-block;width:16px;height:16px;margin-right:8px;
-    border:2.5px solid rgba(255,255,255,.4);
-    border-top-color:#fff;border-radius:50%;
-    vertical-align:-2px;
-    animation:spin .7s linear infinite;
-  }
-  @keyframes spin{to{transform:rotate(360deg);}}
+  .auto-banner.show { display: block; }
 
-  .result{
-    display:none;margin-top:24px;padding:26px;border-radius:18px;text-align:center;
-    background:#fff;border:1px solid var(--line);
-    box-shadow:0 10px 34px rgba(15,23,42,.1);
-    animation:pop .4s cubic-bezier(.2,.9,.3,1.3) both;
+  .result {
+    display: none; margin-top: 24px; padding: 26px;
+    border-radius: 18px; text-align: center;
+    background: #fff; border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 34px rgba(15,23,42,.1);
   }
-  @keyframes pop{from{opacity:0;transform:scale(.94);}to{opacity:1;transform:none;}}
-  .result.show{display:block;}
-  .score-ring{
-    width:140px;height:140px;margin:0 auto 16px;border-radius:50%;
-    display:grid;place-items:center;
-    background:conic-gradient(var(--primary) 0deg, #e2e8f0 0deg);
-    transition:background .8s ease;
-  }
-  .score-inner{
-    width:112px;height:112px;border-radius:50%;background:#fff;
-    display:grid;place-items:center;flex-direction:column;
-  }
-  .score-num{font-size:2rem;font-weight:800;line-height:1;color:var(--primary);}
-  .score-lbl{font-size:.7rem;color:var(--muted);font-weight:600;letter-spacing:.5px;}
-  .result h2{font-size:1.15rem;margin-bottom:6px;}
-  .result .msg{color:var(--muted);font-size:.9rem;margin-bottom:14px;}
-  .stats{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;font-size:.85rem;}
-  .stats div b{display:block;font-size:1.15rem;}
-  .stat-ok b{color:var(--green);}
-  .stat-no b{color:var(--red);}
-  .stat-skip b{color:#f59e0b;}
+  .result.show { display: block; animation: pop .4s cubic-bezier(.2,.9,.3,1.3); }
+  @keyframes pop { from { opacity:0; transform: scale(.94);} to { opacity:1; transform:none;} }
 
-  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:26px 16px 0;}
+  .score-ring {
+    width: 140px; height: 140px; margin: 0 auto 16px;
+    border-radius: 50%; display: grid; place-items: center;
+    background: conic-gradient(#4f46e5 0deg, #e2e8f0 0deg);
+    transition: background .8s;
+  }
+  .score-inner {
+    width: 112px; height: 112px; border-radius: 50%;
+    background: #fff; display: grid; place-items: center;
+    flex-direction: column;
+  }
+  .score-num { font-size: 2rem; font-weight: 800; line-height: 1; color: #4f46e5; }
+  .score-lbl { font-size: .7rem; color: #64748b; font-weight: 600; }
+  .result h2 { font-size: 1.15rem; margin-bottom: 6px; }
+  .result .msg { color: #64748b; font-size: .9rem; margin-bottom: 14px; }
+  .stats { display: flex; justify-content: center; gap: 26px; flex-wrap: wrap; font-size: .85rem; }
+  .stats div b { display: block; font-size: 1.15rem; }
+  .stat-ok b { color: #10b981; }
+  .stat-no b { color: #ef4444; }
 
-  @media(max-width:520px){
-    header h1{font-size:1.25rem;}
-    .card{padding:16px;}
-    .q-text{font-size:.94rem;}
+  footer { text-align: center; color: #64748b; font-size: .78rem; padding: 26px 16px 0; }
+
+  @media (max-width: 520px) {
+    header h1 { font-size: 1.25rem; }
+    .card { padding: 16px; }
   }
 </style>
 </head>
@@ -180,7 +163,7 @@
 
 <header>
   <h1>📚 Ujian Latihan Kelas 7</h1>
-  <p>35 Soal Pilihan Ganda • Matematika, IPA, IPS, Bahasa Indonesia, Bahasa Inggris &amp; PPKn</p>
+  <p>35 Soal • Nilai muncul otomatis setelah semua terjawab</p>
 </header>
 
 <div class="bar-wrap">
@@ -190,15 +173,14 @@
 </div>
 
 <div class="container">
-  <form id="quiz"></form>
+  <div id="quiz"></div>
 
-  <!-- Banner muncul otomatis saat semua soal terjawab -->
   <div class="auto-banner" id="autoBanner">
-    <span class="spin"></span> Semua soal sudah dijawab — menghitung nilai...
+    ⏳ Semua soal sudah dijawab — menghitung nilai...
   </div>
 
   <div class="actions">
-    <button type="button" class="btn-ghost" id="resetBtn">🔄 Ulangi Ujian</button>
+    <button id="resetBtn">🔄 Ulangi Ujian</button>
   </div>
 
   <div class="result" id="result">
@@ -213,255 +195,213 @@
     <div class="stats">
       <div class="stat-ok"><b id="okCount">0</b>Benar</div>
       <div class="stat-no"><b id="noCount">0</b>Salah</div>
-      <div class="stat-skip"><b id="skipCount">0</b>Kosong</div>
     </div>
   </div>
 </div>
 
-<footer>Nilai muncul otomatis setelah semua soal terjawab.</footer>
+<footer>Nilai otomatis muncul saat semua soal terjawab.</footer>
 
 <script>
-/* =========================================================
-   DATA SOAL
-   ========================================================= */
 const questions = [
-  /* ---------- MATEMATIKA ---------- */
-  { s:"Matematika", q:"Hasil dari −12 + 20 − (−8) adalah ...",
-    o:["0","16","24","−16"], a:1,
-    e:"−12 + 20 = 8, lalu 8 − (−8) = 8 + 8 = 16." },
+  { s:"Matematika", q:"Hasil dari −12 + 20 − (−8) adalah ...", o:["0","16","24","−16"], a:1, e:"−12 + 20 = 8, lalu 8 − (−8) = 8 + 8 = 16." },
+  { s:"Matematika", q:"Bentuk sederhana dari 3(2x − 5) + 4(x + 2) adalah ...", o:["10x − 7","10x + 7","10x − 23","6x − 7"], a:0, e:"3(2x−5)=6x−15 dan 4(x+2)=4x+8. Jumlahnya 10x − 7." },
+  { s:"Matematika", q:"Nilai x yang memenuhi 2x + 7 = 19 adalah ...", o:["5","6","7","13"], a:1, e:"2x = 19 − 7 = 12, maka x = 6." },
+  { s:"Matematika", q:"Suhu mula-mula −5 °C, naik 12 °C, lalu turun 8 °C. Suhu akhirnya ...", o:["−1 °C","1 °C","9 °C","15 °C"], a:0, e:"−5 + 12 = 7, lalu 7 − 8 = −1 °C." },
+  { s:"Matematika", q:"Persegi panjang 15 cm × 8 cm. Kelilingnya ...", o:["23 cm","46 cm","120 cm","60 cm"], a:1, e:"K = 2 × (15 + 8) = 46 cm." },
+  { s:"Matematika", q:"Perbandingan umur Andi : Budi = 3 : 5. Jumlah umur 40 tahun. Umur Andi ...", o:["15 tahun","20 tahun","24 tahun","25 tahun"], a:0, e:"3/8 × 40 = 15 tahun." },
+  { s:"Matematika", q:"Skala peta 1 : 500.000, jarak 4 cm. Jarak sebenarnya ...", o:["2 km","20 km","200 km","2.000 km"], a:1, e:"4 × 500.000 = 2.000.000 cm = 20 km." },
 
-  { s:"Matematika", q:"Bentuk sederhana dari 3(2x − 5) + 4(x + 2) adalah ...",
-    o:["10x − 7","10x + 7","10x − 23","6x − 7"], a:0,
-    e:"3(2x−5)=6x−15 dan 4(x+2)=4x+8. Jumlahnya 10x − 7." },
+  { s:"IPA", q:"Satuan SI untuk suhu adalah ...", o:["Celcius","Fahrenheit","Kelvin","Reamur"], a:2, e:"Satuan SI suhu = Kelvin (K)." },
+  { s:"IPA", q:"Perubahan wujud cair menjadi gas disebut ...", o:["Menguap","Mengembun","Menyublim","Membeku"], a:0, e:"Cair → gas = menguap." },
+  { s:"IPA", q:"Organ utama sistem pernapasan manusia adalah ...", o:["Jantung","Paru-paru","Hati","Ginjal"], a:1, e:"Paru-paru tempat pertukaran O₂ dan CO₂." },
+  { s:"IPA", q:"Fotosintesis menghasilkan ...", o:["CO₂ dan air","Oksigen dan glukosa","Nitrogen dan air","Oksigen dan air"], a:1, e:"6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂." },
+  { s:"IPA", q:"Benda 300 gram, volume 100 cm³. Massa jenisnya ...", o:["0,33 g/cm³","3 g/cm³","30 g/cm³","300 g/cm³"], a:1, e:"ρ = m/V = 300/100 = 3 g/cm³." },
+  { s:"IPA", q:"Ilmu pengelompokan makhluk hidup disebut ...", o:["Ekologi","Taksonomi","Anatomi","Genetika"], a:1, e:"Taksonomi = ilmu klasifikasi makhluk hidup." },
+  { s:"IPA", q:"Energi karena kedudukan benda disebut energi ...", o:["Kinetik","Potensial","Kalor","Bunyi"], a:1, e:"Energi potensial bergantung pada posisi/ketinggian." },
 
-  { s:"Matematika", q:"Nilai x yang memenuhi persamaan 2x + 7 = 19 adalah ...",
-    o:["5","6","7","13"], a:1,
-    e:"2x = 19 − 7 = 12, maka x = 12 ÷ 2 = 6." },
+  { s:"IPS", q:"Indonesia terletak di antara dua benua, yaitu ...", o:["Asia dan Eropa","Asia dan Australia","Australia dan Afrika","Eropa dan Afrika"], a:1, e:"Indonesia di antara Benua Asia dan Australia." },
+  { s:"IPS", q:"Masa sebelum manusia mengenal tulisan disebut zaman ...", o:["Sejarah","Praaksara","Modern","Logam"], a:1, e:"Zaman praaksara = sebelum mengenal tulisan." },
+  { s:"IPS", q:"Interaksi sosial diawali oleh adanya ...", o:["Kontak sosial dan komunikasi","Konflik","Akomodasi","Asimilasi"], a:0, e:"Interaksi sosial butuh kontak sosial + komunikasi." },
+  { s:"IPS", q:"Kebutuhan untuk mempertahankan hidup disebut kebutuhan ...", o:["Sekunder","Primer","Tersier","Rohani"], a:1, e:"Kebutuhan primer = kebutuhan pokok." },
+  { s:"IPS", q:"ASEAN didirikan pada ...", o:["8 Agustus 1967","17 Agustus 1945","1 Juni 1966","10 November 1967"], a:0, e:"ASEAN berdiri 8 Agustus 1967 di Bangkok." },
+  { s:"IPS", q:"Gambaran permukaan bumi pada bidang datar dengan skala disebut ...", o:["Globe","Peta","Atlas","Relief"], a:1, e:"Peta = gambaran permukaan bumi pada bidang datar." },
 
-  { s:"Matematika", q:"Suhu sebuah ruangan mula-mula −5 °C. Suhu naik 12 °C, kemudian turun 8 °C. Suhu akhirnya adalah ...",
-    o:["−1 °C","1 °C","9 °C","15 °C"], a:0,
-    e:"−5 + 12 = 7, lalu 7 − 8 = −1 °C." },
+  { s:"Bahasa Indonesia", q:"Teks yang menggambarkan objek secara rinci disebut teks ...", o:["Narasi","Deskripsi","Argumentasi","Eksposisi"], a:1, e:"Teks deskripsi menggambarkan objek lewat pancaindra." },
+  { s:"Bahasa Indonesia", q:"Kalimat efektif adalah ...", o:["Para siswa-siswa semua hadir.","Para siswa hadir di aula.","Semua para siswa-siswa hadir.","Para semua siswa-siswa hadir."], a:1, e:"Kalimat efektif tidak boros kata." },
+  { s:"Bahasa Indonesia", q:"Rima pantun adalah ...", o:["a-a-a-a","a-b-a-b","a-a-b-b","a-b-b-a"], a:1, e:"Pantun bersajak a-b-a-b." },
+  { s:"Bahasa Indonesia", q:"Cerita rakyat yang tokohnya hewan disebut ...", o:["Fabel","Legenda","Mite","Sage"], a:0, e:"Fabel = cerita dengan tokoh binatang." },
+  { s:"Bahasa Indonesia", q:"Teks berisi langkah-langkah membuat sesuatu disebut teks ...", o:["Prosedur","Deskripsi","Berita","Persuasi"], a:0, e:"Teks prosedur berisi langkah-langkah runtut." },
+  { s:"Bahasa Indonesia", q:"\"Angin berbisik menyampaikan salamku\" memakai majas ...", o:["Hiperbola","Personifikasi","Metafora","Simile"], a:1, e:"Personifikasi = benda mati berperilaku seperti manusia." },
 
-  { s:"Matematika", q:"Sebuah persegi panjang memiliki panjang 15 cm dan lebar 8 cm. Kelilingnya adalah ...",
-    o:["23 cm","46 cm","120 cm","60 cm"], a:1,
-    e:"Keliling = 2 × (p + l) = 2 × (15 + 8) = 2 × 23 = 46 cm." },
+  { s:"Bahasa Inggris", q:"Dina: \"How are you?\" — Rani: \"...\"", o:["I'm fine, thank you","My name is Rani","I'm from Bandung","Yes, I do"], a:0, e:"Jawaban 'How are you?' = 'I'm fine, thank you'." },
+  { s:"Bahasa Inggris", q:"She ___ to school every day.", o:["go","goes","going","gone"], a:1, e:"Subjek 'she' → kata kerja + es: goes." },
+  { s:"Bahasa Inggris", q:"\"It has a long trunk and big ears.\" The animal is ...", o:["Elephant","Tiger","Giraffe","Monkey"], a:0, e:"Belalai panjang = ciri gajah (elephant)." },
+  { s:"Bahasa Inggris", q:"The book is ___ the table.", o:["in","on","under","between"], a:1, e:"'on' = di atas permukaan." },
+  { s:"Bahasa Inggris", q:"Urutan benar: is – my – this – book ...", o:["This is my book","My book is this","Is this my book","Book my this is"], a:0, e:"Pola: This + is + my + book." },
 
-  { s:"Matematika", q:"Perbandingan umur Andi dan Budi adalah 3 : 5. Jika jumlah umur mereka 40 tahun, umur Andi adalah ...",
-    o:["15 tahun","20 tahun","24 tahun","25 tahun"], a:0,
-    e:"Umur Andi = 3/(3+5) × 40 = 3/8 × 40 = 15 tahun." },
-
-  { s:"Matematika", q:"Pada peta berskala 1 : 500.000, jarak dua kota adalah 4 cm. Jarak sebenarnya kedua kota tersebut adalah ...",
-    o:["2 km","20 km","200 km","2.000 km"], a:1,
-    e:"Jarak sebenarnya = 4 × 500.000 = 2.000.000 cm = 20 km." },
-
-  /* ---------- IPA ---------- */
-  { s:"IPA", q:"Satuan Sistem Internasional (SI) untuk suhu adalah ...",
-    o:["Celcius","Fahrenheit","Kelvin","Reamur"], a:2,
-    e:"Satuan SI untuk suhu adalah Kelvin (K). Celcius, Fahrenheit, dan Reamur adalah satuan lain yang juga dipakai." },
-
-  { s:"IPA", q:"Perubahan wujud benda dari cair menjadi gas disebut ...",
-    o:["Menguap","Mengembun","Menyublim","Membeku"], a:0,
-    e:"Cair → gas = menguap. Gas → cair = mengembun, padat → gas = menyublim, cair → padat = membeku." },
-
-  { s:"IPA", q:"Organ utama sistem pernapasan pada manusia adalah ...",
-    o:["Jantung","Paru-paru","Hati","Ginjal"], a:1,
-    e:"Paru-paru adalah organ utama pernapasan, tempat terjadinya pertukaran oksigen dan karbon dioksida." },
-
-  { s:"IPA", q:"Fotosintesis pada tumbuhan menghasilkan ...",
-    o:["Karbon dioksida dan air","Oksigen dan glukosa","Nitrogen dan air","Oksigen dan air"], a:1,
-    e:"6CO₂ + 6H₂O → C₆H₁₂O₆ (glukosa) + 6O₂. Hasilnya glukosa dan oksigen." },
-
-  { s:"IPA", q:"Sebuah benda bermassa 300 gram dan bervolume 100 cm³. Massa jenis benda tersebut adalah ...",
-    o:["0,33 g/cm³","3 g/cm³","30 g/cm³","300 g/cm³"], a:1,
-    e:"Massa jenis = massa ÷ volume = 300 ÷ 100 = 3 g/cm³." },
-
-  { s:"IPA", q:"Ilmu yang mempelajari pengelompokan (klasifikasi) makhluk hidup disebut ...",
-    o:["Ekologi","Taksonomi","Anatomi","Genetika"], a:1,
-    e:"Taksonomi adalah ilmu tentang pengelompokan makhluk hidup berdasarkan ciri-ciri tertentu." },
-
-  { s:"IPA", q:"Energi yang dimiliki suatu benda karena kedudukan atau posisinya disebut energi ...",
-    o:["Kinetik","Potensial","Kalor","Bunyi"], a:1,
-    e:"Energi potensial bergantung pada kedudukan/ketinggian benda. Energi kinetik bergantung pada gerak benda." },
-
-  /* ---------- IPS ---------- */
-  { s:"IPS", q:"Secara geografis, Indonesia terletak di antara dua benua, yaitu ...",
-    o:["Asia dan Eropa","Asia dan Australia","Australia dan Afrika","Eropa dan Afrika"], a:1,
-    e:"Indonesia berada di antara Benua Asia dan Benua Australia, serta Samudra Hindia dan Samudra Pasifik." },
-
-  { s:"IPS", q:"Masa sebelum manusia mengenal tulisan dalam sejarah disebut zaman ...",
-    o:["Sejarah","Praaksara","Modern","Logam"], a:1,
-    e:"Zaman praaksara (nirleka) adalah masa sebelum manusia mengenal tulisan." },
-
-  { s:"IPS", q:"Proses interaksi sosial diawali oleh adanya ...",
-    o:["Kontak sosial dan komunikasi","Konflik dan pertentangan","Akomodasi","Asimilasi"], a:0,
-    e:"Interaksi sosial terjadi apabila ada kontak sosial dan komunikasi antara dua pihak atau lebih." },
-
-  { s:"IPS", q:"Kebutuhan yang harus dipenuhi agar manusia dapat mempertahankan hidupnya disebut kebutuhan ...",
-    o:["Sekunder","Primer","Tersier","Rohani"], a:1,
-    e:"Kebutuhan primer adalah kebutuhan dasar/pokok, seperti makanan, pakaian, dan tempat tinggal." },
-
-  { s:"IPS", q:"ASEAN didirikan pada tanggal ...",
-    o:["8 Agustus 1967","17 Agustus 1945","1 Juni 1966","10 November 1967"], a:0,
-    e:"ASEAN berdiri 8 Agustus 1967 di Bangkok, Thailand, melalui Deklarasi Bangkok." },
-
-  { s:"IPS", q:"Gambaran permukaan bumi yang dibuat pada bidang datar dengan skala tertentu disebut ...",
-    o:["Globe","Peta","Atlas","Relief"], a:1,
-    e:"Peta adalah gambaran permukaan bumi pada bidang datar. Globe berbentuk bola, atlas adalah kumpulan peta." },
-
-  /* ---------- BAHASA INDONESIA ---------- */
-  { s:"Bahasa Indonesia", q:"Teks yang menggambarkan suatu objek secara rinci sehingga pembaca seolah-olah melihat, mendengar, atau merasakannya sendiri disebut teks ...",
-    o:["Narasi","Deskripsi","Argumentasi","Eksposisi"], a:1,
-    e:"Teks deskripsi bertujuan menggambarkan objek secara terperinci dengan melibatkan pancaindra." },
-
-  { s:"Bahasa Indonesia", q:"Kalimat berikut yang merupakan kalimat efektif adalah ...",
-    o:["Para siswa-siswa semua hadir di aula.","Para siswa hadir di aula.","Semua para siswa-siswa hadir di aula.","Para semua siswa-siswa hadir di aula."], a:1,
-    e:"Kalimat efektif tidak boros kata. Kata 'para' sudah bermakna jamak, sehingga tidak perlu diulang dengan 'siswa-siswa' atau 'semua'." },
-
-  { s:"Bahasa Indonesia", q:"Rima pantun adalah ...",
-    o:["a-a-a-a","a-b-a-b","a-a-b-b","a-b-b-a"], a:1,
-    e:"Pantun bersajak a-b-a-b, terdiri atas 4 baris: sampiran (baris 1–2) dan isi (baris 3–4)." },
-
-  { s:"Bahasa Indonesia", q:"Cerita rakyat yang tokohnya berupa hewan yang berperilaku seperti manusia disebut ...",
-    o:["Fabel","Legenda","Mite","Sage"], a:0,
-    e:"Fabel adalah cerita fiksi yang tokohnya binatang dan mengandung pesan moral (budi pekerti)." },
-
-  { s:"Bahasa Indonesia", q:"Teks yang berisi langkah-langkah atau tahapan membuat/melakukan sesuatu disebut teks ...",
-    o:["Prosedur","Deskripsi","Berita","Persuasi"], a:0,
-    e:"Teks prosedur berisi tujuan dan langkah-langkah yang harus diurutkan secara runtut." },
-
-  { s:"Bahasa Indonesia", q:"Majas pada kalimat \"Angin berbisik menyampaikan salamku\" adalah majas ...",
-    o:["Hiperbola","Personifikasi","Metafora","Simile"], a:1,
-    e:"Personifikasi adalah majas yang menganggap benda mati memiliki sifat seperti manusia. Angin tidak bisa berbisik." },
-
-  /* ---------- BAHASA INGGRIS ---------- */
-  { s:"Bahasa Inggris", q:"Dina : \"Good morning, how are you?\"\nRani : \"...\"",
-    o:["I'm fine, thank you","My name is Rani","I'm from Bandung","Yes, I do"], a:0,
-    e:"Pertanyaan 'How are you?' dijawab dengan ungkapan keadaan, misalnya 'I'm fine, thank you'." },
-
-  { s:"Bahasa Inggris", q:"She ___ to school every day.",
-    o:["go","goes","going","gone"], a:1,
-    e:"Simple present tense dengan subjek orang ketiga tunggal (she) → kata kerja ditambah -es: goes." },
-
-  { s:"Bahasa Inggris", q:"\"It has a long trunk, big ears, and a short tail.\" The animal is a/an ...",
-    o:["Elephant","Tiger","Giraffe","Monkey"], a:0,
-    e:"Belalai panjang (long trunk), telinga besar, dan ekor pendek adalah ciri gajah (elephant)." },
-
-  { s:"Bahasa Inggris", q:"The book is ___ the table. (di atas meja)",
-    o:["in","on","under","between"], a:1,
-    e:"Preposisi 'on' digunakan untuk menyatakan posisi di atas permukaan sesuatu." },
-
-  { s:"Bahasa Inggris", q:"Susunan yang benar dari kata: is – my – this – book adalah ...",
-    o:["This is my book","My book is this","Is this my book","Book my this is"], a:0,
-    e:"Pola kalimat nominal: Subject (This) + to be (is) + Possessive (my) + Noun (book)." },
-
-  /* ---------- PPKn ---------- */
-  { s:"PPKn", q:"Sila pertama Pancasila dilambangkan dengan ...",
-    o:["Bintang","Rantai","Pohon beringin","Kepala banteng"], a:0,
-    e:"Sila ke-1 'Ketuhanan yang Maha Esa' dilambangkan bintang emas bersudut lima." },
-
-  { s:"PPKn", q:"Aturan yang bersumber dari hati nurani manusia tentang baik dan buruk disebut norma ...",
-    o:["Hukum","Kesusilaan","Kesopanan","Agama"], a:1,
-    e:"Norma kesusilaan berasal dari hati nurani manusia; pelanggarannya menimbulkan rasa bersalah." },
-
-  { s:"PPKn", q:"Semboyan \"Bhinneka Tunggal Ika\" memiliki arti ...",
-    o:["Berbeda-beda tetapi tetap satu","Bersatu kita kuat","Satu untuk semua","Gotong royong"], a:0,
-    e:"Bhinneka Tunggal Ika berarti 'berbeda-beda tetapi tetap satu jua', menggambarkan persatuan dalam keberagaman." },
-
-  { s:"PPKn", q:"UUD Negara Republik Indonesia Tahun 1945 disahkan pada tanggal ...",
-    o:["17 Agustus 1945","18 Agustus 1945","1 Juni 1945","1 Oktober 1945"], a:1,
-    e:"UUD 1945 disahkan oleh PPKI pada 18 Agustus 1945, sehari setelah Proklamasi Kemerdekaan." }
+  { s:"PPKn", q:"Sila pertama Pancasila dilambangkan dengan ...", o:["Bintang","Rantai","Pohon beringin","Kepala banteng"], a:0, e:"Sila ke-1 = bintang emas." },
+  { s:"PPKn", q:"Aturan dari hati nurani tentang baik-buruk disebut norma ...", o:["Hukum","Kesusilaan","Kesopanan","Agama"], a:1, e:"Norma kesusilaan = dari hati nurani." },
+  { s:"PPKn", q:"\"Bhinneka Tunggal Ika\" berarti ...", o:["Berbeda-beda tetapi tetap satu","Bersatu kita kuat","Satu untuk semua","Gotong royong"], a:0, e:"Artinya: berbeda-beda tetapi tetap satu jua." },
+  { s:"PPKn", q:"UUD 1945 disahkan pada ...", o:["17 Agustus 1945","18 Agustus 1945","1 Juni 1945","1 Oktober 1945"], a:1, e:"Disahkan PPKI 18 Agustus 1945." }
 ];
 
-const SUBJECT_COLORS = {
-  "Matematika":        ["#dbeafe","#1d4ed8"],
-  "IPA":               ["#d1fae5","#047857"],
-  "IPS":               ["#fef3c7","#b45309"],
-  "Bahasa Indonesia":  ["#fce7f3","#be185d"],
-  "Bahasa Inggris":    ["#ede9fe","#6d28d9"],
-  "PPKn":              ["#fee2e2","#b91c1c"]
+const COLORS = {
+  "Matematika":["#dbeafe","#1d4ed8"],
+  "IPA":["#d1fae5","#047857"],
+  "IPS":["#fef3c7","#b45309"],
+  "Bahasa Indonesia":["#fce7f3","#be185d"],
+  "Bahasa Inggris":["#ede9fe","#6d28d9"],
+  "PPKn":["#fee2e2","#b91c1c"]
 };
 
-/* =========================================================
-   STATE
-   ========================================================= */
-const form       = document.getElementById('quiz');
-const progressEl = document.getElementById('progressText');
-const fillEl     = document.getElementById('progressFill');
-const resetBtn   = document.getElementById('resetBtn');
-const resultBox  = document.getElementById('result');
-const autoBanner = document.getElementById('autoBanner');
+const LETTERS = ["A","B","C","D"];
 let submitted = false;
-let seconds = 0, timerId = null;
+let seconds = 0;
+let timerId = null;
 
-const LETTERS = ['A','B','C','D'];
+const quizEl = document.getElementById("quiz");
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+const timerEl = document.getElementById("timer");
+const autoBanner = document.getElementById("autoBanner");
+const resultBox = document.getElementById("result");
 
-/* =========================================================
-   RENDER
-   ========================================================= */
-function renderQuiz(){
-  form.innerHTML = questions.map((item, i) => {
-    const [bg, fg] = SUBJECT_COLORS[item.s] || ["#e2e8f0","#334155"];
+function render() {
+  quizEl.innerHTML = questions.map((item, i) => {
+    const [bg, fg] = COLORS[item.s] || ["#e2e8f0", "#334155"];
+    const opts = item.o.map((opt, j) => `
+      <label class="option" id="opt-${i}-${j}">
+        <input type="radio" name="q${i}" value="${j}">
+        <span class="letter">${LETTERS[j]}</span>
+        <span class="opt-text">${opt}</span>
+      </label>`).join("");
     return `
-      <div class="card" id="card-${i}">
+      <div class="card">
         <div class="q-head">
           <span class="badge" style="background:${bg};color:${fg}">${item.s}</span>
-          <span class="num">Soal ${i+1} dari ${questions.length}</span>
+          <span class="num">Soal ${i + 1} dari ${questions.length}</span>
         </div>
-        <p class="q-text">${item.q.replace(/\n/g,'<br>')}</p>
-        <div class="options">
-          ${item.o.map((opt, j) => `
-            <label class="option" id="opt-${i}-${j}">
-              <input type="radio" name="q${i}" value="${j}">
-              <span class="letter">${LETTERS[j]}</span>
-              <span class="opt-text">${opt}</span>
-            </label>`).join('')}
-        </div>
+        <p class="q-text">${item.q}</p>
+        <div class="options">${opts}</div>
         <div class="explain" id="exp-${i}"></div>
       </div>`;
-  }).join('');
-
-  form.addEventListener('change', onAnswerChange);
-  updateProgress();
+  }).join("");
 }
 
-/* =========================================================
-   TRIGGER OTOMATIS saat semua soal terjawab
-   ========================================================= */
-function onAnswerChange(){
-  updateProgress();
+function countAnswered() {
+  let n = 0;
+  for (let i = 0; i < questions.length; i++) {
+    if (document.querySelector(`input[name="q${i}"]:checked`)) n++;
+  }
+  return n;
+}
 
+function updateProgress() {
+  const n = countAnswered();
+  progressText.textContent = `${n} / ${questions.length} dijawab`;
+  progressFill.style.width = (n / questions.length * 100) + "%";
+}
+
+function onAnswer() {
   if (submitted) return;
-
-  // cek apakah semua sudah terjawab
-  const allAnswered = questions.every((_, i) =>
-    document.querySelector(`input[name="q${i}"]:checked`)
-  );
-
-  if (allAnswered){
-    autoGrade();
+  updateProgress();
+  if (countAnswered() === questions.length) {
+    submitted = true;
+    clearInterval(timerId);
+    autoBanner.classList.add("show");
+    autoBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(grade, 800);
   }
 }
 
-function updateProgress(){
-  let answered = 0;
-  questions.forEach((_, i) => {
-    if (document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+function grade() {
+  autoBanner.classList.remove("show");
+  let correct = 0;
+  let wrong = 0;
+
+  questions.forEach((item, i) => {
+    const picked = document.querySelector(`input[name="q${i}"]:checked`);
+    const chosen = picked ? parseInt(picked.value, 10) : -1;
+
+    if (chosen === item.a) correct++;
+    else wrong++;
+
+    item.o.forEach((_, j) => {
+      const label = document.getElementById(`opt-${i}-${j}`);
+      label.classList.add("disabled");
+      if (j === item.a) label.classList.add("correct");
+      else if (j === chosen) label.classList.add("wrong");
+    });
+
+    const exp = document.getElementById(`exp-${i}`);
+    const status = chosen === item.a
+      ? '<b style="color:#047857">✔ Benar!</b> '
+      : '<b style="color:#b91c1c">✘ Salah.</b> ';
+    exp.innerHTML = status + "Jawaban benar: <b>" + LETTERS[item.a] + ". " + item.o[item.a] + "</b><br>" + item.e;
+    exp.classList.add("show");
+
+    document.querySelectorAll(`input[name="q${i}"]`).forEach(inp => inp.disabled = true);
   });
-  progressEl.textContent = `${answered} / ${questions.length} dijawab`;
-  fillEl.style.width = (answered / questions.length * 100) + '%';
+
+  showResult(correct, wrong);
 }
 
-/* =========================================================
-   TIMER
-   ========================================================= */
-function startTimer(){
+function showResult(correct, wrong) {
+  const score = Math.round(correct / questions.length * 100);
+  document.getElementById("scoreNum").textContent = score;
+  document.getElementById("okCount").textContent = correct;
+  document.getElementById("noCount").textContent = wrong;
+
+  const ring = document.getElementById("ring");
+  const color = score >= 75 ? "#10b981" : score >= 60 ? "#f59e0b" : "#ef4444";
+  ring.style.background = `conic-gradient(${color} ${score * 3.6}deg, #e2e8f0 0deg)`;
+  document.getElementById("scoreNum").style.color = color;
+
+  const title = document.getElementById("resultTitle");
+  const msg = document.getElementById("resultMsg");
+
+  if (score >= 90) { title.textContent = "🏆 Luar Biasa!"; msg.textContent = "Pemahamanmu sangat baik!"; }
+  else if (score >= 75) { title.textContent = "🎉 Bagus Sekali!"; msg.textContent = "Sedikit latihan lagi!"; }
+  else if (score >= 60) { title.textContent = "👍 Cukup Baik"; msg.textContent = "Ada materi yang perlu diulang."; }
+  else { title.textContent = "📖 Perlu Belajar Lagi"; msg.textContent = "Baca pembahasan, lalu coba lagi!"; }
+
+  resultBox.classList.add("show");
+  resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function reset() {
+  submitted = false;
   clearInterval(timerId);
+  resultBox.classList.remove("show");
+  autoBanner.classList.remove("show");
+  document.getElementById("scoreNum").style.color = "#4f46e5";
+  document.getElementById("ring").style.background = "conic-gradient(#4f46e5 0deg, #e2e8f0 0deg)";
+  render();
+  updateProgress();
   seconds = 0;
-  const el = document.getElementById('timer');
-  el.textContent = '⏱ 00:00';
+  timerEl.textContent = "⏱ 00:00";
+  startTimer();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function startTimer() {
   timerId = setInterval(() => {
     seconds++;
-    const m = String(Math.floor(seconds/60)).padStart(2,'0');
-    const s = String(seconds%60).padStart(2,'0');
-    el.textContent = `⏱ ${m}:${s}`;
-  }, 10
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
+    timerEl.textContent = `⏱ ${m}:${s}`;
+  }, 1000);
+}
+
+// Event listener pakai event delegation (paling aman)
+quizEl.addEventListener("change", onAnswer);
+
+document.getElementById("resetBtn").addEventListener("click", reset);
+
+// Init
+render();
+updateProgress();
+startTimer();
+</script>
+</body>
+</html>
